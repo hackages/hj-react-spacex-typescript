@@ -1,0 +1,17 @@
+{
+  "name": "deck",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "mdx-deck deck.mdx",
+    "build": "mdx-deck build deck.mdx",
+    "pdf": "mdx-deck pdf deck.mdx"
+  },
+  "dependencies": {
+    "mdx-deck": "^1.8.2"
+  },
+  "devDependencies": {
+    "file-loader": "^3.0.1"
+  }
+}

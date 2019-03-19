@@ -1,0 +1,188 @@
+export { default as theme } from './theme';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { Image } from 'mdx-deck';
+import myImg from './spacex.png';
+import { Head, Notes } from 'mdx-deck';
+import Important from './Important';
+
+# React TypeScript HackJam
+
+<div
+  style={{ fontWeight: 'bold', fontSize: 50, color: 'rgba(128, 203, 196, 1)' }}
+>
+  @Hackages
+</div>
+&nbsp;
+<div style={{fontSize: 25}}>
+  {new Date(Date.now()).toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })}
+</div>
+
+---
+
+## TypeScript
+
+- Superset of JavaScript which provides <Important>optional static typing</Important> (classes, interfaces, ...)
+- Gives <Important>compile time</Important> guarantees (doesn't check anything at runtime)
+
+<Notes>
+  <p>
+    TypeScript will let you add optional static typing to your javascript code.
+    It's a Superset of JavaScript (not built-in).
+  </p>
+</Notes>
+
+---
+
+## Example
+
+```typescript
+interface User {
+  name: string;
+  age: number;
+  role: Role;
+}
+```
+
+&nbsp;
+
+```typescript
+type Role = 'Admin' | 'Basic';
+```
+
+&nbsp;
+
+```typescript
+const myUser: User = { name: 'Bouba', age: 28, role: 'Admin' };
+```
+
+<Notes>
+  <p>We define an interface User which describe what the shape/data of the user should look like (with their type).</p>
+  <p>It could be seen like a contract.</p>
+  <p>Then we can create an object of this type and typescript will ensure that we respect this contract (types are correct)</p>
+</Notes>
+---
+
+## How it works ?
+
+TypeScript checks the code (types) and <Important>analyses it during the compilation.</Important> Then it strips all the
+type stuff from the code, and what is left is JavaScript. The <Important>output is untyped</Important>.
+
+<Notes>
+  <p>
+    TypeScript will check your code (against types) and will analyse it during
+    the compilation. Then all the types are removed and what you end up with is
+    normal JavaScript
+  </p>
+</Notes>
+
+---
+
+## Advantages
+
+- <Important>Quick feedback</Important> loop on a lot of errors
+- Code base becomes much more <Important>self-documenting</Important> and discoverable
+- Helps refactoring / renames, moving stuff around
+- Auto-completion and error messages
+- <Important>Gradual adoption</Important>
+
+---
+
+## React SpaceX
+
+<img src={myImg} />
+
+<Notes>
+  We will use a working application which displays launches from spacex. We'll
+  almost only add types.
+</Notes>
+
+---
+
+## Example: Function Component
+
+```typescript
+type Props = {
+  message: string;
+};
+
+const App: React.FC<Props> = ({ message }) => (
+  <div>{message}</div>
+```
+
+<Notes>
+  <p>To give you a quick overview of how we can type a fonctional component:</p>
+  <p>We define the type of the props the component should receive. Then when we declare the component, we specify
+    that it's a FC for functional component which should receive prop of the type we just defined
+
+  </p>
+</Notes>
+
+---
+
+## Example: Class Component
+
+```typescript
+type Props = {
+  message: string;
+};
+type State = {
+  count: number;
+};
+class App extends React.Component<Props, State> {
+  state { count: 0 };
+  render() {
+    return <div>{this.props.message} {this.state.count}</div>
+  }
+}
+```
+
+<Notes>
+  Same as before but we specify also the type of the State. So we specify what
+  the shape of Props/State should look like
+</Notes>
+
+---
+
+## Instructions
+
+1. Add types for the <Important>launches</Important> (in the data folder) we'll use in the application. You can add these types in the <Important>types.ts</Important> file
+
+```javascript
+const allLaunches = [
+  {
+    flight_number: 1,
+    launch_year: '2006',
+    mission_name: 'FalconSat',
+    details: 'Engine failure at 33 seconds and loss of vehicle',
+    launch_success: false,
+  },
+];
+```
+
+---
+
+## Instructions
+
+2. Add types for the components:
+
+MyComponent.<Important>jsx</Important> -> MyComponent.<Important>tsx</Important>
+
+```typescript
+// import MyComponent from './MyComponent.jsx'
+import MyComponent from './MyComponent';
+```
+
+---
+
+# Let's go!
+
+Github: https://github.com/hackages/hj-react-spacex-typescript
+
+Working version: https://reactspacex.netlify.com/
+
+Cheatsheets: https://devhints.io/typescript / https://github.com/sw-yx/react-typescript-cheatsheet
